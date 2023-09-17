@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import flats from "../../data/flats"; // Import your flats data
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -20,13 +21,16 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
+        {/* Map over flats and create a marker for each */}
+        {flats.map((flat, index) => (
+          <AnyReactComponent
+            key={index}
+            lat={flat.lat} // Replace with the actual property names from your flats data
+            lng={flat.lng}
+            text={flat.name} // You can customize the text shown on the marker
+          />
+        ))}
       </GoogleMapReact>
     </div>
   );
 }
-
